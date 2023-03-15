@@ -3,8 +3,11 @@
  */
 package com.optimagrowth.license.service;
 
+import java.util.Locale;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import com.optimagrowth.license.model.License;
@@ -15,6 +18,8 @@ import com.optimagrowth.license.model.License;
  */
 @Service
 public class LicenseService {
+	
+	@Autowired MessageSource messages;
 	
 	/**
 	 * public License getLicense( String licenseId, String organizationId )
@@ -28,7 +33,7 @@ public class LicenseService {
 		license.setId( new Random( ).nextInt( 1000 ) );
 		license.setLicenseId( licenseId );
 		license.setOrganizationId( organizationId );
-		license.setDescription( "Software product" );
+		license.setDescription( "Software Product" );
 		license.setProductName( "Ostock" );
 		license.setLicenseType( "full" );
 		
@@ -40,12 +45,12 @@ public class LicenseService {
 	 * @param organizationId
 	 * @return
 	 */
-	public String createLicense( License license, String organizationId ) {
+	public String createLicense( License license, String organizationId, Locale locale ) {
 		
 		String responseMessage = null;
 		if ( license != null ) {
 			license.setOrganizationId(organizationId);
-			responseMessage = String.format( "This is the post aand the object is: %s:", license.toString( ) );
+			responseMessage = String.format( messages.getMessage( "license.create.message", null, locale), license.toString( ) );
 		}
 		
 		return responseMessage;
@@ -57,11 +62,11 @@ public class LicenseService {
 	 * @param organizationId
 	 * @return
 	 */
-	public String updateLicense( License license, String organizationId ) {
+	public String updateLicense( License license, String organizationId, Locale locale ) {
 		String responseMessage = null;
 		if ( license != null ) {
 			license.setOrganizationId(organizationId);
-			responseMessage = String.format( "This is the put and the object is %s", license.toString( ) );
+			responseMessage = String.format( messages.getMessage( "license.update.message", null, locale ), license.toString( ) );
 		}
 		return responseMessage;
 	}
@@ -72,8 +77,8 @@ public class LicenseService {
 	 * @param organizationId
 	 * @return
 	 */
-	public String deleteLicense( String licenseId, String organizationId ) {
-		String responseMessage = String.format( "Deleting license with id %s for the organization %", licenseId, organizationId );
+	public String deleteLicense( String licenseId, String organizationId, Locale locale ) {
+		String responseMessage = String.format( messages.getMessage( "license.update.message", null, locale ), licenseId, organizationId );
 		return responseMessage;
 	}
 	

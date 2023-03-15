@@ -68,10 +68,10 @@ public class License {
 	public String toString( ) {
 		return 	"id: " + id 
 			+	" licenseId: " + licenseId
-			+	" description: " + description
-			+	" organizationId: " + organizationId
-			+	" productName: " + productName
-			+	" licenseType: " + licenseType;
+			+	", description: " + description
+			+	", organizationId: " + organizationId
+			+	", productName: " + productName
+			+	", licenseType: " + licenseType;
 	}
 
 }
